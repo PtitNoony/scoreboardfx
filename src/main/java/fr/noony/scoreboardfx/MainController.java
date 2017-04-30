@@ -23,8 +23,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
 import fr.noony.scoreboardfx.home.HomeScreen;
+import fr.noony.scoreboardfx.sevenwonders.SevenWondersMainScreen;
 import java.beans.PropertyChangeEvent;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -34,13 +37,21 @@ public class MainController implements Initializable {
 
     @FXML
     private AnchorPane mainPane;
+    @FXML
+    private Button homeButton;
 
     private Screen homeScreen = null;
+    private Screen sevenWondersMainScreen = null;
 
     private Screen currentScreen;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadHomeScreen();
+    }
+    
+    @FXML
+    protected void onHomeAction(ActionEvent event){
         loadHomeScreen();
     }
 
@@ -51,7 +62,19 @@ public class MainController implements Initializable {
         }
         setAnchorPaneContent(homeScreen.getMainNode());
         currentScreen = homeScreen;
+        homeButton.setDisable(true);
         homeScreen.refresh();
+    }
+    
+    private void loadSevenWondersMainScreen(){
+        if (sevenWondersMainScreen == null) {
+            sevenWondersMainScreen = new SevenWondersMainScreen();
+            sevenWondersMainScreen.addPropertyChangeListener(this::handleHomeEvents);
+        }
+        setAnchorPaneContent(sevenWondersMainScreen.getMainNode());
+        currentScreen = sevenWondersMainScreen;
+        homeButton.setDisable(false);
+        sevenWondersMainScreen.refresh();
     }
 
     //
@@ -59,6 +82,9 @@ public class MainController implements Initializable {
     //
     private void handleHomeEvents(PropertyChangeEvent event) {
         switch (event.getPropertyName()) {
+            case ScreenEvents.LOAD_7_WONDERS:
+                loadSevenWondersMainScreen();
+                break;
             default:
                 throw new UnsupportedOperationException("Unsupported event on HOME page:: " + event.getPropertyName());
         }

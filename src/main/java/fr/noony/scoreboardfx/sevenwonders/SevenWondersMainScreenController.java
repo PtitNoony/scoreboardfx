@@ -14,42 +14,71 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.noony.scoreboardfx.home;
+package fr.noony.scoreboardfx.sevenwonders;
 
 import fr.noony.scoreboardfx.ScreenController;
-import fr.noony.scoreboardfx.ScreenEvents;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
 /**
  *
  * @author Arnaud HAMON-KEROMEN
  */
-public class HomeScreenController implements ScreenController {
+public class SevenWondersMainScreenController implements ScreenController {
 
-    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(HomeScreenController.this);
+    private static final Logger LOGGER = Logger.getGlobal();
+
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(SevenWondersMainScreenController.this);
+
+    @FXML
+    private TabPane tabPane;
+
+    private Node viewerNode;
+    private Node editorNode;
+
+    private SevenWondersViewerController viewerController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO
+        loadViewer();
     }
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
-
+    
     @FXML
-    protected void onSevenWondersAction(ActionEvent event) {
-        propertyChangeSupport.firePropertyChange(ScreenEvents.LOAD_7_WONDERS, null, null);
+    protected void onLoadAction(ActionEvent event){
+        
     }
 
     protected void refresh() {
         //TODO
+    }
+
+    private void loadViewer() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SevenWondersViewerScreen.fxml"));
+            viewerNode = loader.load();
+            viewerController = loader.getController();
+            Tab viewerTab = new Tab("7 Wonders viewer", viewerNode);
+            tabPane.getTabs().add(viewerTab);
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, "Exception while loading seven wonders main screen fxml file:: {0}", ex);
+        }
     }
 
 }

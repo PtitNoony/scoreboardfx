@@ -21,21 +21,25 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * 
+ *
  * @author Arnaud HAMON-KEROMEN
  */
 public class MainApp extends Application {
 
+    private static final double DEFAULT_WIDTH = 1600;
+    private static final double DEFAULT_HEIGHT = 900;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        
-        Scene scene = new Scene(root);
+
+        Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT,Color.BISQUE);
         scene.getStylesheets().add("/styles/Styles.css");
-        
+
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();
@@ -50,6 +54,9 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        PlayerFactory.createPlayer("Alphonse", "A", "Fonce");
+        PlayerFactory.createPlayer("Bob", "B", "Bobby");
+        PlayerFactory.createPlayer("Marcel", "M", "Junior");
         launch(args);
     }
 

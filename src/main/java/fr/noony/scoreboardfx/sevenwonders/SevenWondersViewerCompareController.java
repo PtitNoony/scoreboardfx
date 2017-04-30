@@ -14,42 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.noony.scoreboardfx.home;
+package fr.noony.scoreboardfx.sevenwonders;
 
 import fr.noony.scoreboardfx.ScreenController;
-import fr.noony.scoreboardfx.ScreenEvents;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 
 /**
  *
  * @author Arnaud HAMON-KEROMEN
  */
-public class HomeScreenController implements ScreenController {
-
-    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(HomeScreenController.this);
+public class SevenWondersViewerCompareController implements ScreenController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO
     }
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
-    }
-
-    @FXML
-    protected void onSevenWondersAction(ActionEvent event) {
-        propertyChangeSupport.firePropertyChange(ScreenEvents.LOAD_7_WONDERS, null, null);
-    }
-
-    protected void refresh() {
-        //TODO
     }
 
 }
