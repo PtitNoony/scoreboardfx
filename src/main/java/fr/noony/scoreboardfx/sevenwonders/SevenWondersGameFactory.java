@@ -46,7 +46,7 @@ public class SevenWondersGameFactory {
         while (GAMES.containsKey(nextUniqueID)) {
             nextUniqueID++;
         }
-        final SevenWondersGame game = new SevenWondersGame(); // TODO: ID
+        final SevenWondersGame game = new SevenWondersGame(nextUniqueID);
         GAMES.put(nextUniqueID, game);
         incrementUniqueID();
         return game;

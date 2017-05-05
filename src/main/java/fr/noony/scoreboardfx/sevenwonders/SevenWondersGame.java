@@ -33,9 +33,12 @@ public class SevenWondersGame {
     }
 
     private final Map<Player, SevenWondersScore> scores;
+    private final int id;
+
     private Map<Player, Integer> rankings;
 
-    public SevenWondersGame() {
+    protected SevenWondersGame(int id) {
+        this.id = id;
         scores = new HashMap<>();
     }
 
@@ -43,6 +46,10 @@ public class SevenWondersGame {
         //TODO: test player
         scores.put(score.getPlayer(), score);
         recalculateRanking();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public List<SevenWondersScore> getScores() {
