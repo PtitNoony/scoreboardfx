@@ -32,6 +32,8 @@ public interface Screen {
 
     Node getMainNode();
     
+    String getName();
+    
     void refresh();
 
 }

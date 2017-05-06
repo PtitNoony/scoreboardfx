@@ -16,7 +16,6 @@
  */
 package fr.noony.scoreboardfx.home;
 
-
 import fr.noony.scoreboardfx.Screen;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -31,12 +30,13 @@ import javafx.scene.Node;
  *
  * @author Arnaud HAMON-KEROMEN
  */
-public class HomeScreen implements Screen{
+public class HomeScreen implements Screen {
 
     private static final Logger LOGGER = Logger.getGlobal();
+    private static final String NAME = "Home";
+
     private final PropertyChangeSupport propertyChangeSupport;
-    
-    
+
     private HomeScreenController controller;
     private Node screenNode;
 
@@ -44,8 +44,6 @@ public class HomeScreen implements Screen{
         propertyChangeSupport = new PropertyChangeSupport(HomeScreen.this);
         loadFXML();
     }
-    
-    
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -57,10 +55,14 @@ public class HomeScreen implements Screen{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-
     @Override
     public Node getMainNode() {
         return screenNode;
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 
     @Override
@@ -83,5 +85,5 @@ public class HomeScreen implements Screen{
         // TODO well
         propertyChangeSupport.firePropertyChange(event.getPropertyName(), event.getOldValue(), event.getNewValue());
     }
-    
+
 }

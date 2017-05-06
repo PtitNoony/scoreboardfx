@@ -25,9 +25,15 @@ import javafx.scene.layout.AnchorPane;
 import fr.noony.scoreboardfx.home.HomeScreen;
 import fr.noony.scoreboardfx.sevenwonders.SevenWondersMainScreen;
 import java.beans.PropertyChangeEvent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Menu;
 
 /**
  *
@@ -35,10 +41,13 @@ import javafx.scene.control.Button;
  */
 public class MainController implements Initializable {
 
+    private static final Logger LOGGER = Logger.getGlobal();
+    private final Map<Screen, CheckMenuItem> menuItems = new HashMap<>();
+
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private Button homeButton;
+    private Menu screensMenu;
 
     private Screen homeScreen = null;
     private Screen sevenWondersMainScreen = null;
@@ -49,9 +58,9 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadHomeScreen();
     }
-    
+
     @FXML
-    protected void onHomeAction(ActionEvent event){
+    protected void onHomeAction(ActionEvent event) {
         loadHomeScreen();
     }
 
@@ -59,22 +68,32 @@ public class MainController implements Initializable {
         if (homeScreen == null) {
             homeScreen = new HomeScreen();
             homeScreen.addPropertyChangeListener(this::handleHomeEvents);
+            EventHandler<ActionEvent> homeScreenAction = (event) -> {
+                LOGGER.log(Level.INFO, "Selected Home screen on {0}", event);
+                loadHomeScreen();
+            };
+            createScreenMenuItem(homeScreen, homeScreenAction);
         }
         setAnchorPaneContent(homeScreen.getMainNode());
         currentScreen = homeScreen;
-        homeButton.setDisable(true);
         homeScreen.refresh();
+        updateScreenMenuSelected();
     }
-    
-    private void loadSevenWondersMainScreen(){
+
+    private void loadSevenWondersMainScreen() {
         if (sevenWondersMainScreen == null) {
             sevenWondersMainScreen = new SevenWondersMainScreen();
             sevenWondersMainScreen.addPropertyChangeListener(this::handleHomeEvents);
+            EventHandler<ActionEvent> sevenWondersMainScreenAction = (event) -> {
+                LOGGER.log(Level.INFO, "Selected 7wonders main screen on {0}", event);
+                loadSevenWondersMainScreen();
+            };
+            createScreenMenuItem(sevenWondersMainScreen, sevenWondersMainScreenAction);
         }
         setAnchorPaneContent(sevenWondersMainScreen.getMainNode());
         currentScreen = sevenWondersMainScreen;
-        homeButton.setDisable(false);
         sevenWondersMainScreen.refresh();
+        updateScreenMenuSelected();
     }
 
     //
@@ -97,5 +116,17 @@ public class MainController implements Initializable {
         AnchorPane.setLeftAnchor(node, 0.0);
         AnchorPane.setRightAnchor(node, 0.0);
         AnchorPane.setTopAnchor(node, 0.0);
+    }
+
+    private void updateScreenMenuSelected() {
+        menuItems.forEach((screen, menuItem) -> menuItem.setSelected(screen == currentScreen));
+    }
+
+    private CheckMenuItem createScreenMenuItem(Screen screen, EventHandler<ActionEvent> handler) {
+        CheckMenuItem item = new CheckMenuItem(screen.getName());
+        item.setOnAction(handler);
+        screensMenu.getItems().add(item);
+        menuItems.put(screen, item);
+        return item;
     }
 }

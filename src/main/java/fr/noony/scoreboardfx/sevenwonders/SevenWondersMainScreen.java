@@ -32,6 +32,8 @@ import javafx.scene.Node;
  */
 public class SevenWondersMainScreen implements Screen {
 
+    private static final String NAME = "7Wonders";
+
     private static final Logger LOGGER = Logger.getGlobal();
     private final PropertyChangeSupport propertyChangeSupport;
 
@@ -56,6 +58,11 @@ public class SevenWondersMainScreen implements Screen {
     @Override
     public Node getMainNode() {
         return screenNode;
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 
     @Override

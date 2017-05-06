@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -38,6 +40,8 @@ import javafx.scene.control.Label;
  * @author ahamon
  */
 public class SevenWondersViewerPlayerController implements ScreenController {
+
+    private static final Logger LOG = Logger.getGlobal();
 
     @FXML
     private Label playerLabel;
@@ -66,12 +70,15 @@ public class SevenWondersViewerPlayerController implements ScreenController {
         //
         rankingChart.getXAxis().setLabel("GAMES");
         rankingChart.getYAxis().setLabel("RANKING");
-        NumberAxis rYAxis = (NumberAxis) rankingChart.getYAxis();
-        rYAxis.setMinorTickVisible(false);
-
-        rYAxis.setTickUnit(1);
-        rYAxis.setUpperBound(0);
-        rYAxis.setLowerBound(7);
+        try {
+            NumberAxis rYAxis = (NumberAxis) rankingChart.getYAxis();
+            rYAxis.setMinorTickVisible(false);
+            rYAxis.setTickUnit(1);
+            rYAxis.setUpperBound(0);
+            rYAxis.setLowerBound(7);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Exception while casting ranking chart axis: {0}", e);
+        }
         //
         accordion.setExpandedPane(accordion.getPanes().get(1));
     }

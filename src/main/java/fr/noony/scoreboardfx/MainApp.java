@@ -40,7 +40,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT,Color.BISQUE);
         scene.getStylesheets().add("/styles/Styles.css");
 
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("ScoreBoard FX");
         stage.setScene(scene);
         stage.show();
     }
