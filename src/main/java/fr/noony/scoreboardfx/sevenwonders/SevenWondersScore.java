@@ -16,7 +16,7 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
-import fr.noony.scoreboardfx.Player;
+import fr.noony.gameutils.Player;
 
 /**
  *

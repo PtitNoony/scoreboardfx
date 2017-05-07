@@ -16,7 +16,7 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
-import fr.noony.scoreboardfx.Screen;
+import fr.noony.fxapp.Screen;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -51,7 +51,7 @@ public class SevenWondersMainScreen implements Screen {
     }
 
     @Override
-    public Node getNavigationNode() {
+    public Node getMenuItem() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

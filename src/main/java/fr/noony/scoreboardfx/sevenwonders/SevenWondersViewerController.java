@@ -16,29 +16,27 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
-import fr.noony.scoreboardfx.Player;
-import fr.noony.scoreboardfx.PlayerFactory;
-import fr.noony.scoreboardfx.ScreenController;
+import fr.noony.fxapp.ScreenController;
+import fr.noony.gameutils.Player;
+import fr.noony.gameutils.PlayerFactory;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import org.controlsfx.control.CheckListView;
-
-//debug
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
+import org.controlsfx.control.CheckListView;
 
 /**
  *

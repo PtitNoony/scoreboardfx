@@ -16,7 +16,7 @@
  */
 package fr.noony.scoreboardfx.home;
 
-import fr.noony.scoreboardfx.ScreenController;
+import fr.noony.fxapp.ScreenController;
 import fr.noony.scoreboardfx.ScreenEvents;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

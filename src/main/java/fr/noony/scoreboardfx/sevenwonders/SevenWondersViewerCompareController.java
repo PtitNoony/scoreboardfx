@@ -16,7 +16,7 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
-import fr.noony.scoreboardfx.ScreenController;
+import fr.noony.fxapp.ScreenController;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;

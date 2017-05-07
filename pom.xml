@@ -11,11 +11,30 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mainClass>fr.noony.scoreboardfx.MainApp</mainClass>
+        <netbeans.release.version>RELEASE82</netbeans.release.version>
+        <controlsfx.version>8.40.12</controlsfx.version>
     </properties>
 
     <organization>
         <name>Arnaud HAMON-KEROMEN</name>
     </organization>
+    
+    <repositories>
+        <repository>
+            <id>netbeans</id>
+            <name>NetBeans</name>
+            <url>http://bits.netbeans.org/nexus/content/groups/netbeans/</url>
+        </repository>
+        <repository>
+            <id>sonartype</id>
+            <name>SonarType</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -107,7 +126,27 @@
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>8.40.12</version>
+            <version>${controlsfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ptitnoony</groupId>
+            <artifactId>bowling</artifactId>
+            <version>-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ptitnoony</groupId>
+            <artifactId>FxAppUtils</artifactId>
+            <version>-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ptitnoony</groupId>
+            <artifactId>GamesUtils</artifactId>
+            <version>-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+            <version>${netbeans.release.version}</version>
         </dependency>
     </dependencies>
 

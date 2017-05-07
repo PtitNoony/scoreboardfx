@@ -16,7 +16,7 @@
  */
 package fr.noony.scoreboardfx.home;
 
-import fr.noony.scoreboardfx.Screen;
+import fr.noony.fxapp.Screen;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -51,8 +51,8 @@ public class HomeScreen implements Screen {
     }
 
     @Override
-    public Node getNavigationNode() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Node getMenuItem() {
+        return null;
     }
 
     @Override

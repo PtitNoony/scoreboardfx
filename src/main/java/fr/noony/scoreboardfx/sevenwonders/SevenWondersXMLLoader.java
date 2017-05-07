@@ -16,9 +16,9 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
-import fr.noony.scoreboardfx.Player;
-import fr.noony.scoreboardfx.PlayerFactory;
-import fr.noony.scoreboardfx.PlayerXmlUtils;
+import fr.noony.gameutils.Player;
+import fr.noony.gameutils.PlayerFactory;
+import fr.noony.gameutils.PlayerXmlUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

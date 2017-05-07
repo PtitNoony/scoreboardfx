@@ -16,7 +16,7 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
-import fr.noony.scoreboardfx.Player;
+import fr.noony.gameutils.Player;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
