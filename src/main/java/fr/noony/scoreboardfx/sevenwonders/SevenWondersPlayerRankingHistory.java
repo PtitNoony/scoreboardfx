@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author ahamon
  */
-public class evenWondersPlayerRankingHistory {
+public class SevenWondersPlayerRankingHistory {
 
     private final Player player;
 
@@ -36,12 +36,12 @@ public class evenWondersPlayerRankingHistory {
     private int sixth;
     private int seventh;
 
-    public evenWondersPlayerRankingHistory(Player player, List<SevenWondersGame> games) {
+    public SevenWondersPlayerRankingHistory(Player player, List<SevenWondersGame> games) {
         this.player = player;
         calculateRankingHistory(games);
     }
 
-    public evenWondersPlayerRankingHistory(Player player) {
+    public SevenWondersPlayerRankingHistory(Player player) {
         this(player, SevenWondersGameFactory.getGames());
     }
 
