@@ -20,9 +20,12 @@ import fr.noony.gameutils.Player;
 
 /**
  *
- * @author ahamon
+ * @author Arnaud HAMON-KEROMEN
  */
 public class SevenWondersScore {
+
+    public static final int ARMY_MIN = -6;
+    public static final int ARMY_MAX = 18;
 
     private Player player;
     private int armyScore;
@@ -36,13 +39,37 @@ public class SevenWondersScore {
     private int totalScore;
 
     public SevenWondersScore(Player player, int armyScore, int goldScore, int wonderScore, int civilScore, int tradeScore, int guildScore, int scienceScore) {
+        if (player == null) {
+            throw new IllegalArgumentException("Cannot create a score with a player null");
+        }
         this.player = player;
+        if (!isArmyScoreValid(armyScore)) {
+            throw new IllegalArgumentException("Army score shall be a value between " + ARMY_MIN + " and " + ARMY_MAX + " but was " + armyScore);
+        }
         this.armyScore = armyScore;
+        if (goldScore < 0) {
+            throw new IllegalArgumentException("Gold score shall be posotive but was " + goldScore);
+        }
         this.goldScore = goldScore;
+        if (wonderScore < 0) {
+            throw new IllegalArgumentException("Wonder score shall be posotive but was " + wonderScore);
+        }
         this.wonderScore = wonderScore;
+        if (civilScore < 0) {
+            throw new IllegalArgumentException("Civil score shall be posotive but was " + civilScore);
+        }
         this.civilScore = civilScore;
+        if (tradeScore < 0) {
+            throw new IllegalArgumentException("Trade score shall be posotive but was " + tradeScore);
+        }
         this.tradeScore = tradeScore;
+        if (guildScore < 0) {
+            throw new IllegalArgumentException("Guild score shall be posotive but was " + guildScore);
+        }
         this.guildScore = guildScore;
+        if (scienceScore < 0) {
+            throw new IllegalArgumentException("Science score shall be posotive but was " + scienceScore);
+        }
         this.scienceScore = scienceScore;
         updateTotalScore();
     }
@@ -88,40 +115,64 @@ public class SevenWondersScore {
     }
 
     public void setPlayer(Player player) {
+        if (player == null) {
+            throw new IllegalArgumentException("Player cannot be null");
+        }
         this.player = player;
     }
 
     public void setArmyScore(int armyScore) {
+        if (!isArmyScoreValid(armyScore)) {
+            throw new IllegalArgumentException("Army score shall be a value between " + ARMY_MIN + " and " + ARMY_MAX + " but was " + armyScore);
+        }
         this.armyScore = armyScore;
         updateTotalScore();
     }
 
     public void setGoldScore(int goldScore) {
+        if (goldScore < 0) {
+            throw new IllegalArgumentException("Gold score shall be posotive but was " + goldScore);
+        }
         this.goldScore = goldScore;
         updateTotalScore();
     }
 
     public void setWonderScore(int wonderScore) {
+        if (wonderScore < 0) {
+            throw new IllegalArgumentException("Civil score shall be posotive but was " + civilScore);
+        }
         this.wonderScore = wonderScore;
         updateTotalScore();
     }
 
     public void setCivilScore(int civilScore) {
+        if (civilScore < 0) {
+            throw new IllegalArgumentException("Civil score shall be posotive but was " + civilScore);
+        }
         this.civilScore = civilScore;
         updateTotalScore();
     }
 
     public void setTradeScore(int tradeScore) {
+        if (tradeScore < 0) {
+            throw new IllegalArgumentException("Guild score shall be posotive but was " + guildScore);
+        }
         this.tradeScore = tradeScore;
         updateTotalScore();
     }
 
     public void setGuildScore(int guildScore) {
+        if (guildScore < 0) {
+            throw new IllegalArgumentException("Guild score shall be posotive but was " + guildScore);
+        }
         this.guildScore = guildScore;
         updateTotalScore();
     }
 
     public void setScienceScore(int scienceScore) {
+        if (scienceScore < 0) {
+            throw new IllegalArgumentException("Science score shall be posotive but was " + scienceScore);
+        }
         this.scienceScore = scienceScore;
         updateTotalScore();
     }
@@ -149,6 +200,10 @@ public class SevenWondersScore {
 
     private void updateTotalScore() {
         this.totalScore = armyScore + goldScore + wonderScore + civilScore + tradeScore + guildScore + scienceScore;
+    }
+
+    private boolean isArmyScoreValid(int score) {
+        return score >= ARMY_MIN && score <= ARMY_MAX;
     }
 
 }

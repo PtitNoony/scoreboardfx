@@ -16,16 +16,21 @@
  */
 package fr.noony.scoreboardfx.sevenwonders;
 
+import fr.noony.gameutils.Player;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
  *
- * @author ahamon
+ * @author Arnaud HAMON-KEROMEN
  */
 public class SevenWondersGameFactory {
+
+    private static final Logger LOG = Logger.getGlobal();
 
     private static final Map<Integer, SevenWondersGame> GAMES = new HashMap<>();
 
@@ -46,7 +51,7 @@ public class SevenWondersGameFactory {
         while (GAMES.containsKey(nextUniqueID)) {
             nextUniqueID++;
         }
-        final SevenWondersGame game = new SevenWondersGame(nextUniqueID);
+        final SevenWondersGame game = new GameImpl(nextUniqueID);
         GAMES.put(nextUniqueID, game);
         incrementUniqueID();
         return game;
@@ -70,6 +75,75 @@ public class SevenWondersGameFactory {
         while (GAMES.containsKey(nextUniqueID)) {
             nextUniqueID += ID_INCR;
         }
+    }
+
+    private static class GameImpl implements SevenWondersGame {
+
+        private final Map<Player, SevenWondersScore> scores;
+        private final int id;
+
+        private Map<Player, Integer> rankings;
+
+        private GameImpl(int id) {
+            this.id = id;
+            scores = new HashMap<>();
+        }
+
+        @Override
+        public void addScore(SevenWondersScore score) {
+            if (scores.containsKey(score.getPlayer())) {
+                LOG.log(Level.INFO, "Trying to add a score for an already existing player: {0}", score.getPlayer());
+                return;
+            }
+            scores.put(score.getPlayer(), score);
+            recalculateRanking();
+        }
+
+        @Override
+        public int getId() {
+            return id;
+        }
+
+        @Override
+        public List<SevenWondersScore> getScores() {
+            return scores.values().stream().collect(Collectors.toList());
+        }
+
+        @Override
+        public SevenWondersScore getPlayerScore(Player player) {
+            return scores.get(player);
+        }
+
+        @Override
+        public boolean hasPlayer(Player player) {
+            return scores.containsKey(player);
+        }
+
+        @Override
+        public int getPlayerRanking(Player player) {
+            return rankings.get(player);
+        }
+
+        private void recalculateRanking() {
+            // not optimized
+            //TODO: next step is to use a function for all != games
+            List<SevenWondersScore> orderedGames = scores.values().stream().sorted((g1, g2) -> -Integer.compare(g1.getTotalScore(), g2.getTotalScore())).collect(Collectors.toList());
+            rankings = new HashMap<>();
+            int lastScore = Integer.MIN_VALUE;
+            int lastRanking = 0;
+            for (int i = 0; i < orderedGames.size(); i++) {
+                SevenWondersScore score = orderedGames.get(i);
+                if (lastScore == score.getTotalScore()) {
+                    rankings.put(score.getPlayer(), lastRanking);
+                } else {
+                    rankings.put(score.getPlayer(), i + 1);
+                    lastRanking = i + 1;
+                    lastScore = score.getTotalScore();
+                }
+            }
+
+        }
+
     }
 
 }

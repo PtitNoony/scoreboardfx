@@ -17,75 +17,61 @@
 package fr.noony.scoreboardfx.sevenwonders;
 
 import fr.noony.gameutils.Player;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  *
- * @author ahamon
+ * @author Arnaud HAMON-KEROMEN
  */
-public class SevenWondersGame {
+public interface SevenWondersGame {
 
-    public enum SCORE_CATEGORY {
+    /**
+     * Different score categories for the 7W game
+     */
+    enum SCORE_CATEGORY {
         ARMY, WONDER, GOLD, CIVIL, TRADE, GUILD, SCIENCE
     }
 
-    private final Map<Player, SevenWondersScore> scores;
-    private final int id;
+    /**
+     * Adds the score to the game.
+     *
+     * @param score the score to add
+     */
+    void addScore(SevenWondersScore score);
 
-    private Map<Player, Integer> rankings;
+    /**
+     * Each game has a uniqueID given by the factory upon creation.
+     *
+     * @return the game uniqueID
+     */
+    int getId();
 
-    protected SevenWondersGame(int id) {
-        this.id = id;
-        scores = new HashMap<>();
-    }
+    /**
+     * Returns the scores added in the 7W game.
+     *
+     * @return the list of the game scores
+     */
+    List<SevenWondersScore> getScores();
 
-    public void addScore(SevenWondersScore score) {
-        //TODO: test player
-        scores.put(score.getPlayer(), score);
-        recalculateRanking();
-    }
+    /**
+     *
+     * @param player the 7W player
+     * @return the score of the given player is played the game, null otherwise
+     */
+    SevenWondersScore getPlayerScore(Player player);
 
-    public int getId() {
-        return id;
-    }
+    /**
+     *
+     * @param player the 7W player
+     * @return if the player has been added to the game
+     */
+    boolean hasPlayer(Player player);
 
-    public List<SevenWondersScore> getScores() {
-        return scores.values().stream().collect(Collectors.toList());
-    }
-
-    public SevenWondersScore getPlayerScore(Player player) {
-        return scores.get(player);
-    }
-
-    public boolean hasPlayer(Player player) {
-        return scores.containsKey(player);
-    }
-
-    public int getPlayerRanking(Player player) {
-        return rankings.get(player);
-    }
-
-    private void recalculateRanking() {
-        // not optimized
-        //TODO: next step is to use a function for all != games
-        List<SevenWondersScore> orderedGames = scores.values().stream().sorted((g1, g2) -> Integer.compare(g1.getTotalScore(), g2.getTotalScore())).collect(Collectors.toList());
-        rankings = new HashMap<>();
-        int lastScore = Integer.MIN_VALUE;
-        int lastRanking = 0;
-        for (int i = 0; i < orderedGames.size(); i++) {
-            SevenWondersScore score = orderedGames.get(i);
-            if (lastScore == score.getTotalScore()) {
-                rankings.put(score.getPlayer(), lastRanking);
-            } else {
-                rankings.put(score.getPlayer(), i + 1);
-                lastRanking = i + 1;
-                lastScore = score.getTotalScore();
-            }
-        }
-
-    }
+    /**
+     *
+     * @param player the 7W player
+     * @return the current rank in the game among players added
+     */
+    int getPlayerRanking(Player player);
 
 }
