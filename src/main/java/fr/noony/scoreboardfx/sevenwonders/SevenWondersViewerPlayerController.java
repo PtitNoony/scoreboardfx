@@ -96,7 +96,7 @@ public class SevenWondersViewerPlayerController implements ScreenController {
             populateScoresBreakdownChart(selectedPlayer);
             populateRankingChart(selectedPlayer);
             //
-            sevenWondersPlayerRankingHistory history = new sevenWondersPlayerRankingHistory(selectedPlayer);
+            evenWondersPlayerRankingHistory history = new evenWondersPlayerRankingHistory(selectedPlayer);
             winPercentageL.setText(Integer.toString((int) (history.getWinPercentage() * 100)));
         }
     }

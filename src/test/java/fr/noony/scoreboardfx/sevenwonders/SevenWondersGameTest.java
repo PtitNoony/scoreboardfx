@@ -119,13 +119,14 @@ public class SevenWondersGameTest {
      */
     @Test
     public void testGetPlayerRanking() {
-        testRankingAllZeros();
-        testRankingOneOneTwo();
-        testRankingOneTwoTwoFour();
-        testRankingOneTwoThreeFour();
+        assertTrue(testRankingAllZeros());
+        assertTrue(testRankingOneOneTwo());
+        assertTrue(testRankingOneTwoTwoFour());
+        assertTrue(testRankingOneTwoThreeFour());
+        
     }
 
-    private void testRankingAllZeros() {
+    private boolean testRankingAllZeros() {
         SevenWondersScore scoreA = new SevenWondersScore(playerA);
         SevenWondersScore scoreB = new SevenWondersScore(playerB);
         SevenWondersGame instance = SevenWondersGameFactory.createGame();
@@ -133,9 +134,10 @@ public class SevenWondersGameTest {
         instance.addScore(scoreB);
         assertEquals(1, instance.getPlayerRanking(playerA));
         assertEquals(1, instance.getPlayerRanking(playerB));
+        return true;
     }
 
-    private void testRankingOneOneTwo() {
+    private boolean testRankingOneOneTwo() {
         SevenWondersScore scoreA = new SevenWondersScore(playerA, 1, 0, 0, 0, 0, 0, 0);
         SevenWondersScore scoreB = new SevenWondersScore(playerB, 1, 0, 0, 0, 0, 0, 0);
         SevenWondersScore scoreC = new SevenWondersScore(playerC, 0, 0, 0, 0, 0, 0, 0);
@@ -146,9 +148,10 @@ public class SevenWondersGameTest {
         assertEquals(1, instance.getPlayerRanking(playerA));
         assertEquals(1, instance.getPlayerRanking(playerB));
         assertEquals(3, instance.getPlayerRanking(playerC));
+        return true;
     }
 
-    private void testRankingOneTwoTwoFour() {
+    private boolean testRankingOneTwoTwoFour() {
         SevenWondersScore scoreA = new SevenWondersScore(playerA, 10, 0, 0, 0, 0, 0, 0);
         SevenWondersScore scoreB = new SevenWondersScore(playerB, 1, 0, 0, 0, 0, 0, 0);
         SevenWondersScore scoreC = new SevenWondersScore(playerC, 1, 0, 0, 0, 0, 0, 0);
@@ -162,9 +165,10 @@ public class SevenWondersGameTest {
         assertEquals(2, instance.getPlayerRanking(playerB));
         assertEquals(2, instance.getPlayerRanking(playerC));
         assertEquals(4, instance.getPlayerRanking(playerD));
+        return true;
     }
 
-    private void testRankingOneTwoThreeFour() {
+    private boolean testRankingOneTwoThreeFour() {
         SevenWondersScore scoreA = new SevenWondersScore(playerA, 10, 0, 0, 0, 0, 0, 0);
         SevenWondersScore scoreB = new SevenWondersScore(playerB, 9, 0, 0, 0, 0, 0, 0);
         SevenWondersScore scoreC = new SevenWondersScore(playerC, 8, 0, 0, 0, 0, 0, 0);
@@ -178,6 +182,7 @@ public class SevenWondersGameTest {
         assertEquals(2, instance.getPlayerRanking(playerB));
         assertEquals(3, instance.getPlayerRanking(playerC));
         assertEquals(4, instance.getPlayerRanking(playerD));
+        return true;
     }
 
 }
