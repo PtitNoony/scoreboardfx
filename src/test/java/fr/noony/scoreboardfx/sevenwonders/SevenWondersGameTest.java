@@ -18,9 +18,6 @@ package fr.noony.scoreboardfx.sevenwonders;
 
 import fr.noony.gameutils.Player;
 import fr.noony.gameutils.PlayerFactory;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -36,27 +33,12 @@ public class SevenWondersGameTest {
     private static Player playerC;
     private static Player playerD;
 
-    public SevenWondersGameTest() {
-    }
-
     @BeforeClass
     public static void setUpClass() {
         playerA = PlayerFactory.createPlayer("A", "a", "Aa");
         playerB = PlayerFactory.createPlayer("B", "b", "Bb");
         playerC = PlayerFactory.createPlayer("C", "c", "Cc");
         playerD = PlayerFactory.createPlayer("D", "d", "Dd");
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -123,7 +105,7 @@ public class SevenWondersGameTest {
         assertTrue(testRankingOneOneTwo());
         assertTrue(testRankingOneTwoTwoFour());
         assertTrue(testRankingOneTwoThreeFour());
-        
+
     }
 
     private boolean testRankingAllZeros() {

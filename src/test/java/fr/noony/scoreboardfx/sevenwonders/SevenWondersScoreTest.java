@@ -36,24 +36,9 @@ public class SevenWondersScoreTest {
 
     private static Player player;
 
-    public SevenWondersScoreTest() {
-    }
-
     @BeforeClass
     public static void setUpClass() {
         player = PlayerFactory.createPlayer("A", "a", "Aa");
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**

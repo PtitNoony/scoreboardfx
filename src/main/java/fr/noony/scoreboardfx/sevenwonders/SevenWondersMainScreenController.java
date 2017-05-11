@@ -44,11 +44,6 @@ public class SevenWondersMainScreenController implements ScreenController {
     @FXML
     private TabPane tabPane;
 
-    private Node viewerNode;
-    private Node editorNode;
-
-    private SevenWondersViewerController viewerController;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadViewer();
@@ -58,10 +53,10 @@ public class SevenWondersMainScreenController implements ScreenController {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
-    
+
     @FXML
-    protected void onLoadAction(ActionEvent event){
-        
+    protected void onLoadAction(ActionEvent event) {
+
     }
 
     protected void refresh() {
@@ -72,8 +67,7 @@ public class SevenWondersMainScreenController implements ScreenController {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SevenWondersViewerScreen.fxml"));
-            viewerNode = loader.load();
-            viewerController = loader.getController();
+            Node viewerNode = loader.load();
             Tab viewerTab = new Tab("7 Wonders viewer", viewerNode);
             tabPane.getTabs().add(viewerTab);
         } catch (IOException ex) {
